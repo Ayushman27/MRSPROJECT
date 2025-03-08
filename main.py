@@ -6,21 +6,21 @@ import pickle
 
 
 # flask app
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 
 
 
 # load databasedataset===================================
-sym_des = pd.read_csv("datasets/symtoms_df.csv")
-precautions = pd.read_csv("datasets/precautions_df.csv")
-workout = pd.read_csv("datasets/workout_df.csv")
-description = pd.read_csv("datasets/description.csv")
-medications = pd.read_csv('datasets/medications.csv')
-diets = pd.read_csv("datasets/diets.csv")
+sym_des = pd.read_csv(r'C:\Users\ayush\all project\drug reco\MRS\dataset\symtoms_df.csv')
+precautions = pd.read_csv(r'C:\Users\ayush\all project\drug reco\MRS\dataset\precautions_df.csv')
+workout = pd.read_csv(r'C:\Users\ayush\all project\drug reco\MRS\dataset\workout_df.csv')
+description = pd.read_csv(r'C:\Users\ayush\all project\drug reco\MRS\dataset\description.csv')
+medications = pd.read_csv(r'C:\Users\ayush\all project\drug reco\MRS\dataset\medications.csv')
+diets = pd.read_csv(r'C:\Users\ayush\all project\drug reco\MRS\dataset\diets.csv')
 
 
 # load model===========================================
-svc = pickle.load(open('models/svc.pkl','rb'))
+svc = pickle.load(open(r'C:\Users\ayush\all project\drug reco\MRS\models\svc.pkl','rb'))
 
 
 #============================================================
@@ -78,7 +78,7 @@ def home():
         else:
 
             # Split the user's input into a list of symptoms (assuming they are comma-separated)
-            user_symptoms = [s.strip() for s in symptoms.split(',')]
+            user_symptoms = [s.strip().lower() for s in symptoms.split(',')]
             # Remove any extra characters, if any
             user_symptoms = [symptom.strip("[]' ") for symptom in user_symptoms]
             predicted_disease = get_predicted_value(user_symptoms)
