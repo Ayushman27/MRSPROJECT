@@ -3,24 +3,23 @@ from flask import Flask, request, render_template, jsonify  # Import jsonify
 import numpy as np
 import pandas as pd
 import pickle
-
+from pathlib import Path
 
 # flask app
 app = Flask(__name__, static_folder='static')
-
-
+cwd = Path.cwd()
 
 # load databasedataset===================================
-sym_des = pd.read_csv(r'C:\Users\ayush\all project\drug reco\MRS\dataset\symtoms_df.csv')
-precautions = pd.read_csv(r'C:\Users\ayush\all project\drug reco\MRS\dataset\precautions_df.csv')
-workout = pd.read_csv(r'C:\Users\ayush\all project\drug reco\MRS\dataset\workout_df.csv')
-description = pd.read_csv(r'C:\Users\ayush\all project\drug reco\MRS\dataset\description.csv')
-medications = pd.read_csv(r'C:\Users\ayush\all project\drug reco\MRS\dataset\medications.csv')
-diets = pd.read_csv(r'C:\Users\ayush\all project\drug reco\MRS\dataset\diets.csv')
+sym_des = pd.read_csv(f'{cwd}/dataset/symtoms_df.csv')
+precautions = pd.read_csv(f'{cwd}/dataset/precautions_df.csv')
+workout = pd.read_csv(f'{cwd}/dataset/workout_df.csv')
+description = pd.read_csv(f'{cwd}/dataset/description.csv')
+medications = pd.read_csv(f'{cwd}/dataset/medications.csv')
+diets = pd.read_csv(f'{cwd}/dataset/diets.csv')
 
 
 # load model===========================================
-svc = pickle.load(open(r'C:\Users\ayush\all project\drug reco\MRS\models\svc.pkl','rb'))
+svc = pickle.load(open(f'{cwd}/models/svc.pkl','rb'))
 
 
 #============================================================
